@@ -1,8 +1,3 @@
-"""
-STEP 3 — Regression (predict Rating) + Classification (predict VisitMode)
-Run after 01_clean_and_merge.py. Saves best models + encoders to models/
-and prints a comparison table for both tasks (paste into your report).
-"""
 import pandas as pd
 import numpy as np
 import joblib
@@ -14,9 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.metrics import (r2_score, mean_absolute_error, mean_squared_error,
-                              accuracy_score, precision_recall_fscore_support,
-                              classification_report)
+from sklearn.metrics import (r2_score, mean_absolute_error, mean_squared_error, accuracy_score, precision_recall_fscore_support, classification_report)
 try:
     from xgboost import XGBRegressor, XGBClassifier
     HAS_XGB = True
@@ -33,8 +26,6 @@ print(f"Loaded: {df.shape}")
 TARGET_RATING = "Rating"
 TARGET_VISITMODE = "VisitMode" if "VisitMode" in df.columns else "VisitModeId"
 
-# ---------------- Choose feature columns ----------------
-# ADJUST THIS: add/remove columns based on what's actually in your master_df.
 CANDIDATE_FEATURES = [
     "Continent", "Region", "Country", "CityName",
     "AttractionType", "VisitYear", "VisitMonth",
@@ -55,9 +46,6 @@ for c in X.select_dtypes(include="object").columns:
 joblib.dump(encoders, os.path.join(MODEL_DIR, "encoders.pkl"))
 joblib.dump(FEATURES, os.path.join(MODEL_DIR, "features.pkl"))
 
-# =========================================================
-# REGRESSION: predict Rating
-# =========================================================
 print("\n=== REGRESSION: predicting Rating ===")
 y_reg = model_df[TARGET_RATING]
 Xtr, Xte, ytr, yte = train_test_split(X, y_reg, test_size=0.2, random_state=42)
@@ -87,9 +75,6 @@ print(pd.DataFrame(reg_results).to_string(index=False))
 joblib.dump(best_reg, os.path.join(MODEL_DIR, "regression_model.pkl"))
 print(f"Saved best regressor -> models/regression_model.pkl")
 
-# =========================================================
-# CLASSIFICATION: predict VisitMode
-# =========================================================
 print("\n=== CLASSIFICATION: predicting VisitMode ===")
 y_clf_raw = model_df[TARGET_VISITMODE].astype(str)
 clf_le = LabelEncoder()

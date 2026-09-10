@@ -19,9 +19,6 @@ st.set_page_config(
 MODEL_DIR = "models"
 DATA_PATH = "data/processed/master_df.csv"
 
-# ---------------------------------------------------------
-# Custom CSS — professional theme on top of .streamlit/config.toml
-# ---------------------------------------------------------
 st.markdown("""
 <style>
     #MainMenu, footer {visibility: hidden;}
@@ -93,9 +90,6 @@ def load_data():
 artifacts = load_artifacts()
 df = load_data()
 
-# ---------------------------------------------------------
-# Hero header
-# ---------------------------------------------------------
 st.markdown("""
 <div class="hero">
     <h1>🧳 Tourism Experience Analytics</h1>
@@ -107,9 +101,6 @@ tab_overview, tab_rating, tab_visitmode, tab_recs = st.tabs(
     ["📊 Overview", "⭐ Predict Rating", "🧑‍🤝‍🧑 Predict Visit Mode", "🎯 Recommendations"]
 )
 
-# ---------------------------------------------------------
-# Helper: cascading location + attraction inputs, laid out in a grid
-# ---------------------------------------------------------
 def geo_filtered(frame, **filters):
     """Return frame filtered by the given column=value pairs, ignoring None values."""
     for col, val in filters.items():
@@ -165,9 +156,6 @@ def encode_row(features, encoders, inputs):
             row.append(inputs[feat])
     return row
 
-# ---------------------------------------------------------
-# TAB: Overview / EDA
-# ---------------------------------------------------------
 with tab_overview:
     st.subheader("Dataset snapshot")
     c1, c2, c3 = st.columns(3)
@@ -190,9 +178,6 @@ with tab_overview:
         st.markdown("**Top 10 Most-Visited Attractions**")
         st.dataframe(df["Attraction"].value_counts().head(10), use_container_width=True)
 
-# ---------------------------------------------------------
-# TAB: Rating prediction
-# ---------------------------------------------------------
 with tab_rating:
     st.subheader("Predict the rating a user might give")
     if artifacts["regression_model"] is None:
@@ -212,9 +197,6 @@ with tab_rating:
             </div>
             """, unsafe_allow_html=True)
 
-# ---------------------------------------------------------
-# TAB: Visit mode prediction
-# ---------------------------------------------------------
 with tab_visitmode:
     st.subheader("Predict likely visit mode")
     if artifacts["classification_model"] is None:
@@ -245,9 +227,6 @@ with tab_visitmode:
                 st.markdown("**Probability by visit mode**")
                 st.bar_chart(proba_df.set_index("VisitMode"))
 
-# ---------------------------------------------------------
-# TAB: Recommendations
-# ---------------------------------------------------------
 with tab_recs:
     st.subheader("Personalized attraction recommendations")
     method = st.radio(

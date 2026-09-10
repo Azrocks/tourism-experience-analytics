@@ -1,8 +1,3 @@
-"""
-STEP 2 — Exploratory Data Analysis
-Run after 01_clean_and_merge.py. Saves PNG charts to reports/figures/
-for your documentation, and prints the key numeric insights to paste into your report.
-"""
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -22,7 +17,6 @@ def savefig(name):
     plt.close()
     print(f"Saved {name}")
 
-# ---- Guess column names (adjust if yours differ) ----
 COL_CONTINENT = "Continent" if "Continent" in df.columns else None
 COL_COUNTRY   = "Country" if "Country" in df.columns else None
 COL_ATYPE     = "AttractionType" if "AttractionType" in df.columns else None
