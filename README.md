@@ -1,6 +1,6 @@
 # Tourism Experience Analytics — Run Order (Submission Today)
 
-## 0. Setup (5 min)
+## Setup
 ```bash
 pip install -r requirements.txt
 mkdir -p data/raw data/processed reports/figures models
@@ -10,14 +10,14 @@ edit the `FILES` dict in `01_clean_and_merge.py` if names differ, and the
 `CANDIDATE_FEATURES` list in `03_train_models.py` if your column names differ
 from Continent/Region/Country/CityName/AttractionType/VisitYear/VisitMonth.
 
-## 1. Clean & merge (10 min)
+## 1. Clean & merge
 ```bash
 python 01_clean_and_merge.py
 ```
 Produces `data/processed/master_df.csv` + `cleaning_log.txt` (paste the log
 straight into your report's "Data Preparation" section).
 
-## 2. EDA (10 min)
+## 2. EDA
 ```bash
 python 02_eda.py
 ```
@@ -25,7 +25,7 @@ Produces 8 charts in `reports/figures/`. For each chart, write 1 sentence of
 insight underneath it in your report/slides — that's what gets graded, not
 just the chart itself.
 
-## 3. Train models (10–20 min depending on data size)
+## 3. Train models 
 ```bash
 python 03_train_models.py
 ```
@@ -34,7 +34,7 @@ and Logistic Regression / Random Forest / XGBoost for visit-mode
 classification. Prints comparison tables for both — copy these directly into
 your "Model Performance" report section. Saves the best of each to `models/`.
 
-## 4. Recommendation system (5 min)
+## 4. Recommendation system
 ```bash
 python 04_recommender.py
 ```
@@ -53,7 +53,7 @@ Push this folder to a GitHub repo, then go to https://share.streamlit.io,
 connect the repo, point it at `app.py`. You get a public link to put in your
 submission/resume.
 
-## 7. Write the report (30–45 min)
+## 7. Write the report
 Structure:
 1. **Data Preparation** — paste `cleaning_log.txt`, note row counts before/after.
 2. **EDA** — 4-6 charts from `reports/figures/` with a 1-sentence insight each.
