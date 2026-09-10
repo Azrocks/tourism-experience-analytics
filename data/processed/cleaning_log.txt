@@ -1,0 +1,7 @@
+DATA CLEANING SUMMARY
+Transactions after cleaning: 52930 rows
+Master merged dataset: 52930 rows, 23 columns
+Steps: stripped/title-cased text fields, dropped rows with missing/invalid Rating,
+dropped rows with missing VisitMode, removed duplicate transactions,
+left-joined user/city/country/region/continent/item/type/mode lookup tables,
+filled remaining categorical gaps with 'Unknown'.
